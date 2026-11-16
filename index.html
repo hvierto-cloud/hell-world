@@ -452,17 +452,7 @@ button{cursor:pointer}
             aria-label="Светлая тема">☀</button>
    </div>
   </div>
-  <div style="padding:16px 15px;border-top:1px solid var(--line)">
-   <div style="font-weight:650;margin-bottom:4px">Цвет оформления</div>
-   <div class="color-stage" id="homeColorStage"></div>
-   <div class="color-title" id="homeColorTitle"></div>
-   <div class="color-help">Листай влево или вправо</div>
-   <div class="carousel-controls">
-    <button data-prev="home" aria-label="Предыдущий цвет">‹</button>
-    <button data-next="home" aria-label="Следующий цвет">›</button>
-   </div>
-   <div class="color-preview"></div>
-  </div>
+
  </div>
 </section>
 
@@ -485,7 +475,380 @@ button{cursor:pointer}
    <input id="avatarInput" type="file" accept="image/*" hidden>
   </div>
 
+  <div class="passport" id="passport">
+   <div class="pass-top">
+    <span>HELL WORLD / HELL PASSPORT</span>
+    <span>✦ HELL YEAH</span>
+   </div>
+   <div class="pass-person">
+    <img id="passPhoto" class="pass-photo" alt="Аватар">
+    <div id="passPlaceholder" class="pass-placeholder">◇</div>
+    <div>
+     <h3 id="pName"></h3>
+     <p id="pChat"></p>
+     <p id="pRole"></p>
+    </div>
+   </div>
+   <div class="pass-grid">
+    <div><span>ВИРТ-ВОЗРАСТ</span><b id="pAge"></b></div>
+    <div><span>ДАТА ВСТУПЛЕНИЯ</span><b id="pDate"></b></div>
+    <div><span>СТАТУС</span><b id="pStatus"></b></div>
+    <div><span>ЦВЕТ</span><b id="pColor"></b></div>
+   </div>
+   <div class="pass-bio">
+    <small>О СЕБЕ</small>
+    <p id="pBio"></p>
+   </div>
+  </div>
+
   <label class="field">
+   <span>Вирт-имя</span>
+   <input id="virtName" maxlength="40"
+          placeholder="Например, Джей">
+  </label>
+
+  <label class="field">
+   <span>Название чата</span>
+   <input id="virtChat" maxlength="60"
+          placeholder="Например, Black Hell">
+  </label>
+
+  <div class="field">
+   <span>Цвет паспорта</span>
+   <div class="color-stage" id="idColorStage"></div>
+   <div class="color-title" id="idColorTitle"></div>
+   <div class="color-help">Выбери цвет для своего паспорта</div>
+   <div class="carousel-controls">
+    <button data-prev="id" aria-label="Предыдущий цвет">‹</button>
+    <button data-next="id" aria-label="Следующий цвет">›</button>
+   </div>
+  </div>
+
+  <label class="field">
+   <span>Личный статус</span>
+   <input id="virtStatus" maxlength="80"
+          placeholder="В своём мире ♡">
+  </label>
+
+  <label class="field">
+   <span>О себе</span>
+   <textarea id="virtBio" maxlength="350"
+             placeholder="Расскажи о себе..."></textarea>
+  </label>
+
+  <label class="field">
+   <span>Вирт-возраст</span>
+   <input id="virtAge" maxlength="20"
+          placeholder="Например, 21">
+  </label>
+
+  <label class="field">
+   <span>Роль в КФ</span>
+   <input id="virtRole" maxlength="60"
+          placeholder="Например, участник">
+  </label>
+
+  <label class="field">
+   <span>Дата вступления</span>
+   <input id="virtDate" type="date">
+  </label>
+
+  <div class="actions">
+   <button class="btn" id="saveBtn">Сохранить паспорт</button>
+   <button class="btn secondary" id="previewBtn">Предпросмотр</button>
+  </div>
+  <p class="feedback" id="feedback"></p>
+
+
+ </div>
+</section>
+
+<!-- VIRT FAMILY -->
+<section id="family" class="view">
+ <button class="back" data-page="home">‹ Назад</button>
+ <h1 class="page-title">VIRT FAMILY ♧</h1>
+ <div class="group" style="padding:23px">
+  <p style="color:var(--muted)">
+   Скоро здесь можно будет создавать семьи,
+   приглашать участников и устанавливать родственные связи.
+  </p>
+ </div>
+</section>
+
+<!-- HEART LINK -->
+<section id="heart" class="view">
+ <button class="back" data-page="home">‹ Назад</button>
+ <h1 class="page-title">HEART LINK ♡</h1>
+ <div class="group" style="padding:23px">
+  <p style="color:var(--muted)">
+   Скоро здесь появятся милые взаимодействия,
+   уровни близости и таймер ожидания 1 час.
+  </p>
+ </div>
+</section>
+
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+
+const palette=[
+ {name:'Чёрный',hex:'#35353b'},
+ {name:'Красный',hex:'#e52d4d'},
+ {name:'Зелёный',hex:'#24c784'},
+ {name:'Синий',hex:'#367ef7'},
+ {name:'Жёлтый',hex:'#f5c632'},
+ {name:'Фиолетовый',hex:'#a96aff'},
+ {name:'Розовый',hex:'#ed83bc'},
+ {name:'Белый',hex:'#e5e5ed'}
+];
+
+
+let idIndex=5;
+let avatar='';
+
+function wrap(n,len){
+ return ((n%len)+len)%len;
+}
+
+function renderCarousel(type){
+ const stage=$(type+'ColorStage');
+ const title=$(type+'ColorTitle');
+ const active=idIndex;
+ stage.replaceChildren();
+
+ // Показываем ближайшие цвета, остальные позади
+ for(let offset=-2;offset<=2;offset++){
+  const index=wrap(active+offset,palette.length);
+  const c=palette[index];
+  const card=document.createElement('button');
+  card.type='button';
+  card.className='color-card'+(offset===0?' center':'');
+  card.style.background=
+   'radial-gradient(circle at 32% 24%,#ffffff65,transparent 38%),'+c.hex;
+  const distance=Math.abs(offset);
+  const x=offset*72;
+  const scale=distance===0?1.22:distance===1?.83:.61;
+  const z=distance===0?80:distance===1?0:-90;
+  const rotation=offset===0?0:offset<0?17:-17;
+  card.style.transform=
+   'translate(-50%,-50%) translateX('+x+'px) '+
+   'translateZ('+z+'px) rotateY('+rotation+'deg) '+
+   'scale('+scale+')';
+  card.style.opacity=distance===2?.48:1;
+  card.style.filter=distance===2?'brightness(.75)':'none';
+  card.style.zIndex=String(10-distance);
+  card.setAttribute('aria-label',c.name);
+  card.setAttribute('aria-pressed',String(offset===0));
+  card.onclick=()=>{
+   if(offset===0)return;
+   changeColor(type,offset);
+  };
+  stage.appendChild(card);
+ }
+ title.textContent=palette[active].name;
+ document.documentElement.style.setProperty('--accent',palette[idIndex].hex);
+ updatePreview();
+}
+
+function changeColor(type,delta){
+ idIndex=wrap(idIndex+delta,palette.length);
+ renderCarousel('id');
+}
+
+document.querySelectorAll('[data-prev]').forEach(btn=>{
+ btn.onclick=()=>changeColor(btn.dataset.prev,-1);
+});
+document.querySelectorAll('[data-next]').forEach(btn=>{
+ btn.onclick=()=>changeColor(btn.dataset.next,1);
+});
+
+function enableSwipe(type){
+ const stage=$(type+'ColorStage');
+ let startX=null;
+ stage.addEventListener('touchstart',e=>{
+  startX=e.touches[0].clientX;
+ },{passive:true});
+ stage.addEventListener('touchend',e=>{
+  if(startX===null)return;
+  const diff=e.changedTouches[0].clientX-startX;
+  startX=null;
+  if(Math.abs(diff)>28){
+   changeColor(type,diff<0?1:-1);
+   stage.dataset.swiped='1';
+   setTimeout(()=>delete stage.dataset.swiped,350);
+  }
+ },{passive:true});
+}
+
+function showPage(id){
+ document.querySelectorAll('.view').forEach(v=>
+  v.classList.remove('active')
+ );
+ $(id).classList.add('active');
+ window.scrollTo({top:0,behavior:'instant'});
+}
+
+document.querySelectorAll('[data-page]').forEach(btn=>{
+ btn.onclick=()=>showPage(btn.dataset.page);
+});
+
+function setTheme(light){
+ document.body.classList.toggle('light',light);
+ $('darkBtn').classList.toggle('selected',!light);
+ $('lightBtn').classList.toggle('selected',light);
+ try{
+  localStorage.setItem('hellLight',light?'1':'0');
+ }catch(e){}
+}
+$('darkBtn').onclick=()=>setTheme(false);
+$('lightBtn').onclick=()=>setTheme(true);
+
+function setAvatar(data){
+ avatar=data||'';
+ for(const id of ['uploadPhoto','homePhoto']){
+  const img=$(id);
+  if(avatar){
+   img.src=avatar;
+   img.style.display='block';
+  }else{
+   img.removeAttribute('src');
+   img.style.display='none';
+  }
+ }
+ $('cameraIcon').style.display=avatar?'none':'block';
+ $('homePlaceholder').style.display=avatar?'none':'block';
+}
+
+$('avatarInput').addEventListener('change',event=>{
+ const file=event.target.files[0];
+ if(!file)return;
+ if(!file.type.startsWith('image/')){
+  alert('Выбери изображение');
+  return;
+ }
+ const reader=new FileReader();
+ reader.onload=()=>{
+  const image=new Image();
+  image.onload=()=>{
+   const scale=Math.min(
+    1,500/Math.max(image.width,image.height)
+   );
+   const canvas=document.createElement('canvas');
+   canvas.width=Math.max(1,Math.round(image.width*scale));
+   canvas.height=Math.max(1,Math.round(image.height*scale));
+   canvas.getContext('2d').drawImage(
+    image,0,0,canvas.width,canvas.height
+   );
+   setAvatar(canvas.toDataURL('image/jpeg',.78));
+  };
+  image.onerror=()=>alert('Не удалось открыть фото');
+  image.src=reader.result;
+ };
+ reader.readAsDataURL(file);
+});
+
+function collect(){
+ return{
+  name:$('virtName').value.trim(),
+  chat:$('virtChat').value.trim(),
+  status:$('virtStatus').value.trim(),
+  bio:$('virtBio').value.trim(),
+  age:$('virtAge').value.trim(),
+  role:$('virtRole').value.trim(),
+  date:$('virtDate').value,
+  color:palette[idIndex].name,
+  avatar
+ };
+}
+
+function updatePreview(){
+ const d=collect();
+ const fields={
+  pName:d.name||'Без имени',
+  pChat:d.chat||'Чат не указан',
+  pRole:d.role||'Участник',
+  pAge:d.age||'—',
+  pDate:d.date?d.date.split('-').reverse().join('.'):'—',
+  pStatus:d.status||'—',
+  pColor:d.color,
+  pBio:d.bio||'Пока ничего не написано.'
+ };
+ Object.entries(fields).forEach(([id,value])=>{
+  $(id).textContent=value;
+ });
+ $('passport').style.setProperty(
+  '--pass',palette[idIndex].hex
+ );
+ if(d.avatar){
+  $('passPhoto').src=d.avatar;
+  $('passPhoto').style.display='block';
+  $('passPlaceholder').style.display='none';
+ }else{
+  $('passPhoto').style.display='none';
+  $('passPlaceholder').style.display='grid';
+ }
+
+}
+
+['virtName','virtChat','virtStatus','virtBio','virtAge','virtRole','virtDate'].forEach(id=>{
+ $(id).addEventListener('input',updatePreview);
+ $(id).addEventListener('change',updatePreview);
+});
+
+$('saveBtn').onclick=()=>{
+ const d=collect();
+ if(!d.name||!d.chat){
+  $('feedback').textContent=
+   'Укажи вирт-имя и название чата.';
+  return;
+ }
+ try{
+  localStorage.setItem('hellVirtId',JSON.stringify(d));
+  $('homeName').textContent=d.name;
+  $('homeChat').textContent=d.chat;
+  $('feedback').textContent='✓ Паспорт сохранён';
+  updatePreview();
+ }catch(e){
+  $('feedback').textContent=
+   'Ошибка сохранения. Попробуй другое фото.';
+ }
+};
+
+function load(){
+ try{
+  const raw=localStorage.getItem('hellVirtId');
+  if(raw){
+   const d=JSON.parse(raw);
+   const mapping={
+    virtName:d.name,
+    virtChat:d.chat,
+    virtStatus:d.status,
+    virtBio:d.bio,
+    virtAge:d.age,
+    virtRole:d.role,
+    virtDate:d.date
+   };
+   Object.entries(mapping).forEach(([id,value])=>{
+    $(id).value=value||'';
+   });
+   $('homeName').textContent=d.name||'Твой профиль';
+   $('homeChat').textContent=d.chat||'Создай HELL паспорт';
+   const found=palette.findIndex(c=>c.name===d.color);
+   if(found>=0)idIndex=found;
+   setAvatar(d.avatar);
+  }
+  setTheme(localStorage.getItem('hellLight')==='1');
+ }catch(e){}
+}
+
+load();
+renderCarousel('id');
+enableSwipe('id');
+updatePreview();
+</script>
+</body>
+</html>d">
    <span>Вирт-имя</span>
    <input id="virtName" maxlength="40"
           placeholder="Например, Джей">
