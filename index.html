@@ -416,7 +416,7 @@ button{cursor:pointer}
   </div>
   <div class="profile-info">
    <h2 id="homeName">Твой профиль</h2>
-   <p id="homeChat">Создай свой VIRT ID</p>
+   <p id="homeChat">Создай свой HELL паспорт</p>
    <div class="small-accent">✦ HELL WORLD</div>
   </div>
  </div>
@@ -425,7 +425,7 @@ button{cursor:pointer}
  <div class="group">
   <button class="menu-row" data-page="id">
    <span class="symbol">◇</span>
-   <span class="name">Мой VIRT ID</span>
+   <span class="name">Мой HELL паспорт</span>
    <span class="chevron">›</span>
   </button>
   <button class="menu-row" data-page="family">
@@ -469,7 +469,7 @@ button{cursor:pointer}
 <!-- VIRT ID -->
 <section id="id" class="view">
  <button class="back" data-page="home">‹ Назад</button>
- <h1 class="page-title">VIRT ID ◇</h1>
+ <h1 class="page-title">HELL паспорт ◇</h1>
  <p class="subtitle">Создай свой виртуальный паспорт.</p>
 
  <div class="group form-box">
@@ -545,7 +545,7 @@ button{cursor:pointer}
 
   <div class="passport hidden" id="passport">
    <div class="pass-top">
-    <span>HELL WORLD / VIRT ID</span>
+    <span>HELL WORLD / HELL PASSPORT</span>
     <span>✦ HELL YEAH</span>
    </div>
    <div class="pass-person">
@@ -851,7 +851,7 @@ function load(){
     $(id).value=value||'';
    });
    $('homeName').textContent=d.name||'Твой профиль';
-   $('homeChat').textContent=d.chat||'Создай VIRT ID';
+   $('homeChat').textContent=d.chat||'Создай HELL паспорт';
    const found=palette.findIndex(c=>c.name===d.color);
    if(found>=0)idIndex=found;
    setAvatar(d.avatar);
@@ -859,17 +859,4 @@ function load(){
   const savedColor=localStorage.getItem('hellThemeColor');
   if(savedColor!==null){
    const n=Number(savedColor);
-   if(Number.isInteger(n))homeIndex=wrap(n,palette.length);
-  }
-  setTheme(localStorage.getItem('hellLight')==='1');
- }catch(e){}
-}
-
-load();
-renderCarousel('home');
-renderCarousel('id');
-enableSwipe('home');
-enableSwipe('id');
-</script>
-</body>
-</html>
+   if(Number.is
