@@ -2,106 +2,127 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HELL WORLD</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #100d16;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-    header {
-      padding: 35px 20px;
-      text-align: center;
-      background: linear-gradient(135deg,#25132e,#100d16);
-    }
-    h1 { color: #d6a7ff; letter-spacing: 3px; }
-    p { color: #bdb0c7; }
-    main { padding: 20px; }
-    .card {
-      background: #21192b;
-      border: 1px solid #49315b;
-      border-radius: 18px;
-      padding: 22px;
-      margin-bottom: 15px;
-    }
-    .card h2 { color: #d6a7ff; }
-    button {
-      background: #a477ed;
-      color: #130d19;
-      border: none;
-      border-radius: 12px;
-      padding: 12px 20px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .hidden { display: none; }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 10px;
-      border: 1px solid #665077;
-      background: #17111f;
-      color: white;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HELL WORLD</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;color:#fff;
+ font-family:Arial,sans-serif;
+ background:
+ radial-gradient(ellipse at 85% 8%,#49325a80,transparent 48%),
+ radial-gradient(ellipse at 5% 90%,#36274780,transparent 55%),
+ #0c0b12;
+}
+.app{padding:30px 20px;max-width:700px;margin:auto}
+.eyebrow{font-size:10px;letter-spacing:3px;color:#bca9d4}
+h1{font-size:32px;letter-spacing:2px;margin:10px 0 30px}
+.hero,.tile,.panel{
+ background:linear-gradient(135deg,#ffffff20,#ffffff08);
+ border:1px solid #ffffff35;
+ box-shadow:0 10px 35px #0005,inset 0 1px #ffffff25;
+ backdrop-filter:blur(22px);
+ -webkit-backdrop-filter:blur(22px);
+ border-radius:22px;
+}
+.hero{padding:25px;margin-bottom:35px}
+.hero h2{font-size:23px;line-height:1.3}
+p{color:#c8c1d1;line-height:1.5}
+.label{font-size:11px;letter-spacing:2px;color:#c5a9e8}
+.cards{
+ display:flex;gap:14px;overflow-x:auto;
+ scroll-snap-type:x mandatory;
+ padding:8px 2px 20px;
+ scrollbar-width:none;
+}
+.cards::-webkit-scrollbar{display:none}
+.tile{
+ flex:0 0 205px;min-height:210px;
+ padding:22px;scroll-snap-align:start;
+ display:flex;flex-direction:column;
+ cursor:pointer;
+}
+.tile .symbol{font-size:30px;color:#d7b8ff}
+.tile h3{font-size:19px;margin:auto 0 6px}
+.tile p{font-size:12px;margin:0}
+.arrow{align-self:flex-end;color:#d7b8ff;margin-top:12px}
+.panel{padding:22px;margin-top:20px}
+.hidden{display:none}
+input,textarea,select{
+ display:block;width:100%;padding:13px;
+ margin:12px 0;border-radius:12px;
+ border:1px solid #ffffff30;
+ background:#ffffff12;color:white;
+ font:inherit;
+}
+select option{color:#17121f}
+button{
+ background:#c4a0f4;color:#181020;
+ border:0;border-radius:12px;
+ padding:12px 20px;font-weight:bold;
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>HELL WORLD</h1>
-    <p>Твоя личность. Твоя семья. Твоя история.</p>
-  </header>
+<div class="app">
+ <div class="eyebrow">HELL YEAH • MINI APP</div>
+ <h1>HELL WORLD ✦</h1>
 
-  <main>
-    <section class="card">
-      <h2>🪪 VIRT ID</h2>
-      <p>Создай свой виртуальный паспорт.</p>
-      <button onclick="show('passport')">Открыть</button>
-    </section>
+ <div class="hero">
+  <div class="label">WELCOME TO YOUR WORLD</div>
+  <h2>Твоя история начинается здесь.</h2>
+  <p>Создай личность. Найди семью.
+  Укрепляй связи.</p>
+ </div>
 
-    <section class="card">
-      <h2>🖤 VIRT FAMILY</h2>
-      <p>Создавай виртуальные семьи и связи.</p>
-      <button onclick="show('family')">Открыть</button>
-    </section>
+ <div class="label">ИССЛЕДУЙ МИР</div>
+ <div class="cards">
+  <div class="tile" onclick="openPanel('id')">
+   <div class="symbol">◇</div>
+   <h3>VIRT ID</h3>
+   <p>Твой виртуальный паспорт</p>
+   <div class="arrow">↗</div>
+  </div>
+  <div class="tile" onclick="openPanel('family')">
+   <div class="symbol">♧</div>
+   <h3>VIRT FAMILY</h3>
+   <p>Твоя семья и родственные связи</p>
+   <div class="arrow">↗</div>
+  </div>
+  <div class="tile" onclick="openPanel('heart')">
+   <div class="symbol">♡</div>
+   <h3>HEART LINK</h3>
+   <p>Взаимодействия и близость</p>
+   <div class="arrow">↗</div>
+  </div>
+ </div>
 
-    <section class="card">
-      <h2>💗 HEART LINK</h2>
-      <p>Повышай уровень близости с друзьями.</p>
-      <button onclick="show('heart')">Открыть</button>
-    </section>
+ <div id="id" class="panel hidden">
+  <h2>◇ VIRT ID</h2>
+  <input placeholder="Твой вирт-ник">
+  <input placeholder="Название твоего чата">
+  <p>Скоро здесь появится паспорт с выбором цвета.</p>
+ </div>
 
-    <section id="passport" class="card hidden">
-      <h2>Мой паспорт</h2>
-      <input placeholder="Вирт-имя">
-      <input placeholder="Название чата">
-      <p>Скоро добавим аватарку и цвет паспорта.</p>
-    </section>
+ <div id="family" class="panel hidden">
+  <h2>♧ VIRT FAMILY</h2>
+  <p>Здесь появятся семьи и семейное древо.</p>
+ </div>
 
-    <section id="family" class="card hidden">
-      <h2>Моя семья</h2>
-      <p>Здесь появится семейное древо.</p>
-    </section>
-
-    <section id="heart" class="card hidden">
-      <h2>Наша близость</h2>
-      <p>Уровни, милые действия и таймер 1 час.</p>
-    </section>
-  </main>
-
-  <script>
-    function show(id) {
-      document.querySelectorAll('main section[id]')
-        .forEach(el => el.classList.add('hidden'));
-      document.getElementById(id).classList.remove('hidden');
-      document.getElementById(id).scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
-  </script>
+ <div id="heart" class="panel hidden">
+  <h2>♡ HEART LINK</h2>
+  <p>Милые действия, XP близости и таймер 1 час.</p>
+ </div>
+</div>
+<script>
+function openPanel(id){
+ document.querySelectorAll('.panel')
+ .forEach(p=>p.classList.add('hidden'));
+ const panel=document.getElementById(id);
+ panel.classList.remove('hidden');
+ panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
 </body>
 </html>
