@@ -860,3 +860,16 @@ function load(){
   if(savedColor!==null){
    const n=Number(savedColor);
    if(Number.is
+}
+  setTheme(localStorage.getItem('hellLight')==='1');
+ }catch(e){}
+}
+
+load();
+renderCarousel('home');
+renderCarousel('id');
+enableSwipe('home');
+enableSwipe('id');
+</script>
+</body>
+</html>
