@@ -859,8 +859,8 @@ function load(){
   const savedColor=localStorage.getItem('hellThemeColor');
   if(savedColor!==null){
    const n=Number(savedColor);
-   if(Number.is
-}
+   if(Number.isInteger(n))homeIndex=wrap(n,palette.length);
+  }
   setTheme(localStorage.getItem('hellLight')==='1');
  }catch(e){}
 }
