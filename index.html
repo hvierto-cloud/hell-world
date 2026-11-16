@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -7,122 +8,335 @@
 <title>HELL WORLD</title>
 <style>
 *{box-sizing:border-box}
+:root{--accent:#b58aff}
 body{
- margin:0;min-height:100vh;color:#fff;
+ margin:0;min-height:100vh;color:white;
  font-family:Arial,sans-serif;
  background:
- radial-gradient(ellipse at 85% 8%,#49325a80,transparent 48%),
- radial-gradient(ellipse at 5% 90%,#36274780,transparent 55%),
- #0c0b12;
+ radial-gradient(ellipse at 85% 10%,#62418b70,transparent 50%),
+ radial-gradient(ellipse at 5% 85%,#4d326d60,transparent 55%),
+ #0b0912;
+ background-attachment:fixed;
 }
-.app{padding:30px 20px;max-width:700px;margin:auto}
-.eyebrow{font-size:10px;letter-spacing:3px;color:#bca9d4}
-h1{font-size:32px;letter-spacing:2px;margin:10px 0 30px}
-.hero,.tile,.panel{
- background:linear-gradient(135deg,#ffffff20,#ffffff08);
- border:1px solid #ffffff35;
- box-shadow:0 10px 35px #0005,inset 0 1px #ffffff25;
- backdrop-filter:blur(22px);
- -webkit-backdrop-filter:blur(22px);
- border-radius:22px;
+.app{max-width:720px;margin:auto;padding:28px 18px 60px}
+.small{font-size:11px;letter-spacing:2px;color:#c7b4db}
+h1{font-size:32px;letter-spacing:2px}
+h2{font-size:23px}
+p{color:#c7bdd1;line-height:1.5}
+.glass{
+ background:rgba(255,255,255,.055);
+ border:1px solid rgba(255,255,255,.25);
+ box-shadow:inset 0 1px rgba(255,255,255,.25),
+ 0 12px 35px #0005;
+ backdrop-filter:blur(14px);
+ -webkit-backdrop-filter:blur(14px);
+ border-radius:24px;
 }
-.hero{padding:25px;margin-bottom:35px}
-.hero h2{font-size:23px;line-height:1.3}
-p{color:#c8c1d1;line-height:1.5}
-.label{font-size:11px;letter-spacing:2px;color:#c5a9e8}
+.hero{padding:24px;margin:25px 0 32px}
 .cards{
  display:flex;gap:14px;overflow-x:auto;
  scroll-snap-type:x mandatory;
- padding:8px 2px 20px;
+ padding:12px 0 22px;
  scrollbar-width:none;
 }
 .cards::-webkit-scrollbar{display:none}
 .tile{
- flex:0 0 205px;min-height:210px;
+ flex:0 0 205px;min-height:195px;
  padding:22px;scroll-snap-align:start;
  display:flex;flex-direction:column;
  cursor:pointer;
 }
-.tile .symbol{font-size:30px;color:#d7b8ff}
-.tile h3{font-size:19px;margin:auto 0 6px}
+.tile h3{margin:auto 0 8px}
 .tile p{font-size:12px;margin:0}
-.arrow{align-self:flex-end;color:#d7b8ff;margin-top:12px}
-.panel{padding:22px;margin-top:20px}
-.hidden{display:none}
+.symbol{font-size:30px;color:var(--accent)}
+.arrow{text-align:right;color:var(--accent)}
+.panel{padding:20px;margin-top:20px}
+.hidden{display:none!important}
 input,textarea,select{
- display:block;width:100%;padding:13px;
- margin:12px 0;border-radius:12px;
- border:1px solid #ffffff30;
+ width:100%;padding:13px;margin:7px 0 16px;
  background:#ffffff12;color:white;
- font:inherit;
+ border:1px solid #ffffff35;
+ border-radius:12px;font:inherit;
 }
-select option{color:#17121f}
+textarea{resize:vertical;min-height:85px}
+select option{color:#18121f}
+label{font-size:13px;color:#d3c5e2}
 button{
- background:#c4a0f4;color:#181020;
- border:0;border-radius:12px;
- padding:12px 20px;font-weight:bold;
+ border:0;border-radius:13px;
+ padding:13px 19px;
+ background:var(--accent);color:#130c1b;
+ font-weight:bold;font-size:14px;
+ cursor:pointer;
 }
+.secondary{
+ background:#ffffff17;color:white;
+ border:1px solid #ffffff35;
+}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.swatches{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 20px}
+.swatch{
+ width:35px;height:35px;border-radius:50%;
+ border:2px solid #ffffff55;
+ cursor:pointer;
+}
+.swatch.active{outline:2px solid white;outline-offset:3px}
+.passport{
+ --card-accent:var(--accent);
+ padding:20px;margin-top:20px;
+ background:linear-gradient(125deg,
+ color-mix(in srgb,var(--card-accent) 22%,transparent),
+ rgba(255,255,255,.035));
+ border:1px solid color-mix(in srgb,var(--card-accent) 65%,white);
+ border-radius:23px;
+ box-shadow:0 15px 35px #0006;
+}
+.passport-top{display:flex;justify-content:space-between;gap:10px}
+.profile{display:flex;align-items:center;gap:15px;margin:23px 0}
+.avatar{
+ width:86px;height:100px;
+ object-fit:cover;border-radius:14px;
+ background:#ffffff18;border:1px solid #ffffff40;
+}
+.info{min-width:0;flex:1}
+.info h2{margin:0 0 8px;overflow-wrap:anywhere}
+.info p{margin:4px 0;font-size:13px}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.detail span{font-size:10px;color:#c5b5d2;letter-spacing:1px}
+.detail strong{display:block;margin-top:5px;overflow-wrap:anywhere}
+.bio{
+ margin-top:18px;padding:14px;
+ background:#ffffff0d;border-radius:13px;
+ overflow-wrap:anywhere;
+}
+#avatarPreview{display:none}
+.note{font-size:12px;color:#a99bb7}
 </style>
 </head>
 <body>
 <div class="app">
- <div class="eyebrow">HELL YEAH • MINI APP</div>
+ <div class="small">HELL YEAH • MINI APP</div>
  <h1>HELL WORLD ✦</h1>
 
- <div class="hero">
-  <div class="label">WELCOME TO YOUR WORLD</div>
+ <div class="hero glass">
+  <div class="small">WELCOME TO YOUR WORLD</div>
   <h2>Твоя история начинается здесь.</h2>
-  <p>Создай личность. Найди семью.
-  Укрепляй связи.</p>
+  <p>Создай личность. Найди семью. Укрепляй связи.</p>
  </div>
 
- <div class="label">ИССЛЕДУЙ МИР</div>
+ <div class="small">ИССЛЕДУЙ МИР</div>
  <div class="cards">
-  <div class="tile" onclick="openPanel('id')">
+  <div class="tile glass" onclick="openPanel('id')">
    <div class="symbol">◇</div>
    <h3>VIRT ID</h3>
    <p>Твой виртуальный паспорт</p>
    <div class="arrow">↗</div>
   </div>
-  <div class="tile" onclick="openPanel('family')">
+  <div class="tile glass" onclick="openPanel('family')">
    <div class="symbol">♧</div>
    <h3>VIRT FAMILY</h3>
-   <p>Твоя семья и родственные связи</p>
+   <p>Семья и родственные связи</p>
    <div class="arrow">↗</div>
   </div>
-  <div class="tile" onclick="openPanel('heart')">
+  <div class="tile glass" onclick="openPanel('heart')">
    <div class="symbol">♡</div>
    <h3>HEART LINK</h3>
-   <p>Взаимодействия и близость</p>
+   <p>Близость и взаимодействия</p>
    <div class="arrow">↗</div>
   </div>
  </div>
 
- <div id="id" class="panel hidden">
-  <h2>◇ VIRT ID</h2>
-  <input placeholder="Твой вирт-ник">
-  <input placeholder="Название твоего чата">
-  <p>Скоро здесь появится паспорт с выбором цвета.</p>
- </div>
+ <section id="id" class="panel glass hidden">
+  <h2>◇ Создать VIRT ID</h2>
+  <p>Заполни данные своего виртуального паспорта.</p>
 
- <div id="family" class="panel hidden">
+  <label for="virtName">Вирт-имя</label>
+  <input id="virtName" maxlength="40" placeholder="Например, Ликорис">
+
+  <label for="virtChat">Название чата</label>
+  <input id="virtChat" maxlength="60" placeholder="Например, BLACK HELL">
+
+  <label for="avatarInput">Аватарка</label>
+  <input id="avatarInput" type="file" accept="image/*">
+
+  <label>Цвет паспорта</label>
+  <div class="swatches" id="swatches"></div>
+
+  <label for="virtStatus">Личный статус</label>
+  <input id="virtStatus" maxlength="80" placeholder="В своём мире ♡">
+
+  <label for="virtBio">О себе</label>
+  <textarea id="virtBio" maxlength="350" placeholder="Расскажи о себе..."></textarea>
+
+  <label for="virtAge">Вирт-возраст</label>
+  <input id="virtAge" maxlength="20" placeholder="Например, 21">
+
+  <label for="virtRole">Роль в КФ</label>
+  <input id="virtRole" maxlength="60" placeholder="Например, участник или владелец">
+
+  <label for="virtDate">Дата вступления</label>
+  <input id="virtDate" type="date">
+
+  <div class="actions">
+   <button onclick="savePassport()">Сохранить паспорт</button>
+   <button class="secondary" onclick="previewPassport()">Предпросмотр</button>
+  </div>
+  <p class="note" id="saveMessage"></p>
+
+  <div id="passportPreview" class="passport hidden">
+   <div class="passport-top">
+    <span class="small">HELL WORLD / VIRT ID</span>
+    <span>✦</span>
+   </div>
+   <div class="profile">
+    <img id="avatarPreview" class="avatar" alt="Аватар">
+    <div class="info">
+     <h2 id="outName"></h2>
+     <p id="outChat"></p>
+     <p id="outRole"></p>
+    </div>
+   </div>
+   <div class="details">
+    <div class="detail"><span>ВИРТ-ВОЗРАСТ</span><strong id="outAge"></strong></div>
+    <div class="detail"><span>ДАТА ВСТУПЛЕНИЯ</span><strong id="outDate"></strong></div>
+    <div class="detail"><span>СТАТУС</span><strong id="outStatus"></strong></div>
+    <div class="detail"><span>ЦВЕТ</span><strong id="outColor"></strong></div>
+   </div>
+   <div class="bio">
+    <span class="small">О СЕБЕ</span>
+    <p id="outBio"></p>
+   </div>
+  </div>
+ </section>
+
+ <section id="family" class="panel glass hidden">
   <h2>♧ VIRT FAMILY</h2>
-  <p>Здесь появятся семьи и семейное древо.</p>
- </div>
+  <p>Скоро здесь появятся виртуальные семьи.</p>
+ </section>
 
- <div id="heart" class="panel hidden">
+ <section id="heart" class="panel glass hidden">
   <h2>♡ HEART LINK</h2>
-  <p>Милые действия, XP близости и таймер 1 час.</p>
- </div>
+  <p>Скоро добавим милые взаимодействия, XP и таймер 1 час.</p>
+ </section>
 </div>
+
 <script>
+const colors=[
+ ["Фиолетовый","#b58aff"],
+ ["Красный","#ef647c"],
+ ["Синий","#619fff"],
+ ["Зелёный","#60d5a0"],
+ ["Жёлтый","#f3cf65"],
+ ["Чёрный","#777789"],
+ ["Розовый","#f39dc9"],
+ ["Белый","#e6e6f1"]
+];
+let chosenColor=colors[0];
+let avatarData="";
+
+const $=id=>document.getElementById(id);
+
 function openPanel(id){
- document.querySelectorAll('.panel')
- .forEach(p=>p.classList.add('hidden'));
- const panel=document.getElementById(id);
- panel.classList.remove('hidden');
- panel.scrollIntoView({behavior:'smooth',block:'start'});
+ document.querySelectorAll(".panel").forEach(p=>p.classList.add("hidden"));
+ $(id).classList.remove("hidden");
+ $(id).scrollIntoView({behavior:"smooth",block:"start"});
 }
+
+function drawColors(){
+ $("swatches").replaceChildren();
+ colors.forEach(c=>{
+  const b=document.createElement("button");
+  b.type="button";
+  b.className="swatch"+(c[0]===chosenColor[0]?" active":"");
+  b.style.background=c[1];
+  b.title=c[0];
+  b.setAttribute("aria-label",c[0]);
+  b.onclick=()=>{chosenColor=c;drawColors()};
+  $("swatches").appendChild(b);
+ });
+}
+
+$("avatarInput").addEventListener("change",e=>{
+ const file=e.target.files[0];
+ if(!file)return;
+ if(!file.type.startsWith("image/")){
+  alert("Выбери изображение");return;
+ }
+ const reader=new FileReader();
+ reader.onload=()=>{avatarData=reader.result};
+ reader.readAsDataURL(file);
+});
+
+function collect(){
+ return {
+  name:$("virtName").value.trim(),
+  chat:$("virtChat").value.trim(),
+  status:$("virtStatus").value.trim(),
+  bio:$("virtBio").value.trim(),
+  age:$("virtAge").value.trim(),
+  role:$("virtRole").value.trim(),
+  date:$("virtDate").value,
+  color:chosenColor[0],
+  avatar:avatarData
+ };
+}
+
+function previewPassport(){
+ const d=collect();
+ $("passportPreview").classList.remove("hidden");
+ $("passportPreview").style.setProperty("--card-accent",chosenColor[1]);
+ const values={
+  outName:d.name||"Без имени",
+  outChat:d.chat||"Чат не указан",
+  outRole:d.role||"Участник",
+  outAge:d.age||"—",
+  outDate:d.date?d.date.split("-").reverse().join("."):"—",
+  outStatus:d.status||"—",
+  outColor:d.color,
+  outBio:d.bio||"Пока ничего не написано."
+ };
+ Object.entries(values).forEach(([id,value])=>$(id).textContent=value);
+ if(d.avatar){
+  $("avatarPreview").src=d.avatar;
+  $("avatarPreview").style.display="block";
+ }else{
+  $("avatarPreview").removeAttribute("src");
+  $("avatarPreview").style.display="none";
+ }
+ $("passportPreview").scrollIntoView({behavior:"smooth"});
+}
+
+function savePassport(){
+ const d=collect();
+ if(!d.name||!d.chat){
+  alert("Укажи вирт-имя и название чата");
+  return;
+ }
+ try{
+  localStorage.setItem("hellVirtId",JSON.stringify(d));
+  $("saveMessage").textContent="✓ Паспорт сохранён на этом устройстве";
+  previewPassport();
+ }catch(e){
+  $("saveMessage").textContent="Не удалось сохранить. Попробуй уменьшить аватарку.";
+ }
+}
+
+function loadPassport(){
+ try{
+  const raw=localStorage.getItem("hellVirtId");
+  if(!raw)return;
+  const d=JSON.parse(raw);
+  const mapping={
+   virtName:d.name,virtChat:d.chat,virtStatus:d.status,
+   virtBio:d.bio,virtAge:d.age,virtRole:d.role,virtDate:d.date
+  };
+  Object.entries(mapping).forEach(([id,value])=>$(id).value=value||"");
+  chosenColor=colors.find(c=>c[0]===d.color)||colors[0];
+  avatarData=d.avatar||"";
+ }catch(e){}
+}
+
+loadPassport();
+drawColors();
 </script>
 </body>
 </html>
