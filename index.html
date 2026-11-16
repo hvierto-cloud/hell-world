@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HELL WORLD</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #100d16;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      padding: 35px 20px;
+      text-align: center;
+      background: linear-gradient(135deg,#25132e,#100d16);
+    }
+    h1 { color: #d6a7ff; letter-spacing: 3px; }
+    p { color: #bdb0c7; }
+    main { padding: 20px; }
+    .card {
+      background: #21192b;
+      border: 1px solid #49315b;
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 15px;
+    }
+    .card h2 { color: #d6a7ff; }
+    button {
+      background: #a477ed;
+      color: #130d19;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .hidden { display: none; }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 10px;
+      border: 1px solid #665077;
+      background: #17111f;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HELL WORLD</h1>
+    <p>Твоя личность. Твоя семья. Твоя история.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>🪪 VIRT ID</h2>
+      <p>Создай свой виртуальный паспорт.</p>
+      <button onclick="show('passport')">Открыть</button>
+    </section>
+
+    <section class="card">
+      <h2>🖤 VIRT FAMILY</h2>
+      <p>Создавай виртуальные семьи и связи.</p>
+      <button onclick="show('family')">Открыть</button>
+    </section>
+
+    <section class="card">
+      <h2>💗 HEART LINK</h2>
+      <p>Повышай уровень близости с друзьями.</p>
+      <button onclick="show('heart')">Открыть</button>
+    </section>
+
+    <section id="passport" class="card hidden">
+      <h2>Мой паспорт</h2>
+      <input placeholder="Вирт-имя">
+      <input placeholder="Название чата">
+      <p>Скоро добавим аватарку и цвет паспорта.</p>
+    </section>
+
+    <section id="family" class="card hidden">
+      <h2>Моя семья</h2>
+      <p>Здесь появится семейное древо.</p>
+    </section>
+
+    <section id="heart" class="card hidden">
+      <h2>Наша близость</h2>
+      <p>Уровни, милые действия и таймер 1 час.</p>
+    </section>
+  </main>
+
+  <script>
+    function show(id) {
+      document.querySelectorAll('main section[id]')
+        .forEach(el => el.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+      document.getElementById(id).scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  </script>
+</body>
+</html>
