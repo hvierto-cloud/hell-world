@@ -877,5 +877,21 @@ renderCarousel('id');
 enableSwipe('id');
 updatePreview();
 </script>
+<script>
+  const tg = window.Telegram?.WebApp;
+
+  if (tg) {
+    tg.ready();
+
+    const telegramUser = tg.initDataUnsafe?.user;
+
+    if (telegramUser) {
+      console.log("Telegram ID:", telegramUser.id);
+      console.log("Имя:", telegramUser.first_name);
+      console.log("Username:", telegramUser.username);
+      console.log("Аватар:", telegramUser.photo_url);
+    }
+  }
+</script>
 </body>
 </html>
