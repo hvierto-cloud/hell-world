@@ -432,6 +432,39 @@ button{cursor:pointer}
 .carousel-controls button{width:24px;height:24px;font-size:16px}
 .passport{margin-bottom:10px}
 .pass-photo,.pass-placeholder{aspect-ratio:1/1;flex-shrink:0}
+
+/* VIRT FAMILY — gothic dynasty */
+.dynasty{--dyn:#9671bf;--gold:#d9ba80}
+.dynasty .dyn-panel{background:linear-gradient(145deg,color-mix(in srgb,var(--dyn) 12%,var(--panel)),var(--panel) 65%);border:1px solid color-mix(in srgb,var(--dyn) 40%,var(--line));border-radius:22px;padding:18px;margin:13px 0}
+.dyn-kicker{color:var(--gold);letter-spacing:2px;font-size:10px;text-align:center;font-weight:750}
+.dynasty .dyn-head{text-align:center;padding:24px 16px;border-color:#9b7b51}
+.dyn-head h2{font-family:Georgia,serif;letter-spacing:1px;font-size:24px;margin:8px 0;color:var(--text);overflow-wrap:anywhere}
+.dyn-motto{font-family:Georgia,serif;font-style:italic;color:var(--gold);overflow-wrap:anywhere}
+.dyn-crest{width:126px;height:145px;display:block;margin:12px auto;filter:drop-shadow(0 8px 12px #0007)}
+.dyn-crest svg{width:100%;height:100%}
+.dyn-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.dyn-choice{padding:10px 4px;border:1px solid var(--line);border-radius:15px;background:var(--bg);color:var(--text);min-width:0}
+.dyn-choice[aria-pressed=true]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.dyn-choice .dyn-crest{width:66px;height:78px;margin:0 auto 4px}
+.dyn-choice small{display:block;font-size:11px}
+.dyn-colors{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 20px}
+.dyn-color{height:36px;width:36px;border-radius:50%;border:2px solid #ffffff44;box-shadow:inset 0 2px 7px #fff3}
+.dyn-color[aria-pressed=true]{outline:2px solid var(--gold);outline-offset:3px}
+.dyn-upload{display:flex;gap:14px;align-items:center;margin:15px 0}
+.dyn-avatar{width:75px;height:75px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;overflow:hidden;flex-shrink:0;background:var(--bg);font-size:28px;cursor:pointer}
+.dyn-avatar img{width:100%;height:100%;object-fit:cover;display:none}
+.dyn-muted{color:var(--muted);font-size:12px}
+.dyn-member{display:flex;align-items:center;gap:11px;padding:11px;border:1px solid var(--line);border-radius:14px;margin:8px 0;background:var(--bg)}
+.dyn-member .dyn-dot{width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);flex-shrink:0}
+.dyn-member .dyn-member-info{flex:1;min-width:0;overflow-wrap:anywhere}
+.dyn-member small{display:block;color:var(--gold)}
+.dyn-member button{background:none;border:0;color:var(--muted);font-size:19px;padding:5px}
+.dyn-tree{display:flex;flex-direction:column;align-items:center;gap:0}
+.dyn-tree .dyn-member{width:100%;max-width:320px}
+.dyn-tree-line{height:23px;width:1px;background:var(--gold);opacity:.7}
+.dyn-hidden{display:none!important}
+.dynasty .btn{background:var(--dyn);color:#fff}
+.dynasty .btn.secondary{background:var(--panel);color:var(--text)}
 </style>
 </head>
 <body>
@@ -599,299 +632,34 @@ button{cursor:pointer}
 </section>
 
 <!-- VIRT FAMILY -->
-<section id="family" class="view">
+<section id="family" class="view dynasty">
  <button class="back" data-page="home">‹ Назад</button>
  <h1 class="page-title">VIRT FAMILY ♧</h1>
- <div class="group" style="padding:23px">
-  <p style="color:var(--muted)">
-   Скоро здесь можно будет создавать семьи,
-   приглашать участников и устанавливать родственные связи.
-  </p>
+ <p class="subtitle">Твоя династия. Твой герб. Твоя история.</p>
+ <div id="dynDisplay" class="dyn-hidden">
+  <div class="dyn-panel dyn-head">
+   <div class="dyn-kicker">✦ HELL WORLD · VIRT DYNASTY ✦</div>
+   <div id="dynHeroCrest" class="dyn-crest"></div>
+   <h2 id="dynHeroName"></h2>
+   <div class="dyn-motto" id="dynHeroMotto"></div>
+   <div class="dyn-upload" style="justify-content:center"><div class="dyn-avatar" id="dynHeroAvatar">♧</div><div style="text-align:left"><b>Аватарка семьи</b><div class="dyn-muted">Отдельно от герба</div></div></div>
+   <p id="dynHeroStory" class="dyn-muted" style="white-space:pre-wrap"></p>
+  </div>
+  <div class="dyn-panel"><div class="dyn-kicker">РОДОСЛОВНАЯ</div><div id="dynTree" class="dyn-tree"></div></div>
+  <div class="actions"><button class="btn" id="dynEdit">Редактировать</button><button class="btn secondary" id="dynAddMember">Добавить родственника</button></div>
+  <p class="dyn-muted">Пока династия хранится только на этом устройстве. Приглашения другим участникам появятся после подключения базы.</p>
  </div>
-</section>
-
-<!-- HEART LINK -->
-<section id="heart" class="view">
- <button class="back" data-page="home">‹ Назад</button>
- <h1 class="page-title">HEART LINK ♡</h1>
- <div class="group" style="padding:23px">
-  <p style="color:var(--muted)">
-   Скоро здесь появятся милые взаимодействия,
-   уровни близости и таймер ожидания 1 час.
-  </p>
- </div>
-</section>
-
-</div>
-
-<script>
-const $=id=>document.getElementById(id);
-
-const palette=[
- {name:'Чёрный',hex:'#35353b'},
- {name:'Красный',hex:'#e52d4d'},
- {name:'Зелёный',hex:'#24c784'},
- {name:'Синий',hex:'#367ef7'},
- {name:'Жёлтый',hex:'#f5c632'},
- {name:'Фиолетовый',hex:'#a96aff'},
- {name:'Розовый',hex:'#ed83bc'},
- {name:'Белый',hex:'#e5e5ed'}
-];
-
-
-let idIndex=5;
-let avatar='';
-
-function wrap(n,len){
- return ((n%len)+len)%len;
-}
-
-function renderCarousel(type){
- const stage=$(type+'ColorStage');
- const title=$(type+'ColorTitle');
- const active=idIndex;
- stage.replaceChildren();
-
- // Показываем ближайшие цвета, остальные позади
- for(let offset=-2;offset<=2;offset++){
-  const index=wrap(active+offset,palette.length);
-  const c=palette[index];
-  const card=document.createElement('button');
-  card.type='button';
-  card.className='color-card'+(offset===0?' center':'');
-  card.style.background=
-   'radial-gradient(circle at 32% 24%,#ffffff65,transparent 38%),'+c.hex;
-   const distance=Math.abs(offset);
-   const x=offset===0?0:(offset<0?-1:1)*(distance===1?45:84);
-   const scale=distance===0?1:distance===1?.70:.48;
-   card.style.transform='translate(-50%,-50%) translateX('+x+'px) scale('+scale+')';
-   card.style.opacity=1;
-   card.style.filter='none';
-  card.style.zIndex=String(10-distance);
-  card.setAttribute('aria-label',c.name);
-  card.setAttribute('aria-pressed',String(offset===0));
-  card.onclick=()=>{
-   if(offset===0)return;
-   changeColor(type,offset);
-  };
-  stage.appendChild(card);
- }
- title.textContent=palette[active].name;
- document.documentElement.style.setProperty('--accent',palette[idIndex].hex);
- updatePreview();
-}
-
-function changeColor(type,delta){
- idIndex=wrap(idIndex+delta,palette.length);
- renderCarousel('id');
-}
-
-document.querySelectorAll('[data-prev]').forEach(btn=>{
- btn.onclick=()=>changeColor(btn.dataset.prev,-1);
-});
-document.querySelectorAll('[data-next]').forEach(btn=>{
- btn.onclick=()=>changeColor(btn.dataset.next,1);
-});
-
-function enableSwipe(type){
- const stage=$(type+'ColorStage');
- let startX=null;
- stage.addEventListener('touchstart',e=>{
-  startX=e.touches[0].clientX;
- },{passive:true});
- stage.addEventListener('touchend',e=>{
-  if(startX===null)return;
-  const diff=e.changedTouches[0].clientX-startX;
-  startX=null;
-  if(Math.abs(diff)>28){
-   changeColor(type,diff<0?1:-1);
-   stage.dataset.swiped='1';
-   setTimeout(()=>delete stage.dataset.swiped,350);
-  }
- },{passive:true});
-}
-
-function showPage(id){
- document.querySelectorAll('.view').forEach(v=>
-  v.classList.remove('active')
- );
- $(id).classList.add('active');
- window.scrollTo({top:0,behavior:'instant'});
-}
-
-document.querySelectorAll('[data-page]').forEach(btn=>{
- btn.onclick=()=>showPage(btn.dataset.page);
-});
-
-function setTheme(light){
- document.body.classList.toggle('light',light);
- $('darkBtn').classList.toggle('selected',!light);
- $('lightBtn').classList.toggle('selected',light);
- try{
-  localStorage.setItem('hellLight',light?'1':'0');
- }catch(e){}
-}
-$('darkBtn').onclick=()=>setTheme(false);
-$('lightBtn').onclick=()=>setTheme(true);
-
-function setAvatar(data){
- avatar=data||'';
- for(const id of ['uploadPhoto','homePhoto']){
-  const img=$(id);
-  if(avatar){
-   img.src=avatar;
-   img.style.display='block';
-  }else{
-   img.removeAttribute('src');
-   img.style.display='none';
-  }
- }
- $('cameraIcon').style.display=avatar?'none':'block';
- $('homePlaceholder').style.display=avatar?'none':'block';
-}
-
-$('avatarInput').addEventListener('change',event=>{
- const file=event.target.files[0];
- if(!file)return;
- if(!file.type.startsWith('image/')){
-  alert('Выбери изображение');
-  return;
- }
- const reader=new FileReader();
- reader.onload=()=>{
-  const image=new Image();
-  image.onload=()=>{
-   const scale=Math.min(
-    1,500/Math.max(image.width,image.height)
-   );
-   const canvas=document.createElement('canvas');
-   canvas.width=Math.max(1,Math.round(image.width*scale));
-   canvas.height=Math.max(1,Math.round(image.height*scale));
-   canvas.getContext('2d').drawImage(
-    image,0,0,canvas.width,canvas.height
-   );
-   setAvatar(canvas.toDataURL('image/jpeg',.78));
-  };
-  image.onerror=()=>alert('Не удалось открыть фото');
-  image.src=reader.result;
- };
- reader.readAsDataURL(file);
-});
-
-function collect(){
- return{
-  name:$('virtName').value.trim(),
-  chat:$('virtChat').value.trim(),
-  status:$('virtStatus').value.trim(),
-  bio:$('virtBio').value.trim(),
-  age:$('virtAge').value.trim(),
-  role:$('virtRole').value.trim(),
-  date:$('virtDate').value,
-  color:palette[idIndex].name,
-  avatar
- };
-}
-
-function updatePreview(){
- const d=collect();
- const fields={
-  pName:d.name||'Без имени',
-  pChat:d.chat||'Чат не указан',
-  pRole:d.role||'Участник',
-  pAge:d.age||'—',
-  pDate:d.date?d.date.split('-').reverse().join('.'):'—',
-  pStatus:d.status||'—',
-  pColor:d.color,
-  pBio:d.bio||'Пока ничего не написано.'
- };
- Object.entries(fields).forEach(([id,value])=>{
-  $(id).textContent=value;
- });
- $('passport').style.setProperty(
-  '--pass',palette[idIndex].hex
- );
- if(d.avatar){
-  $('passPhoto').src=d.avatar;
-  $('passPhoto').style.display='block';
-  $('passPlaceholder').style.display='none';
- }else{
-  $('passPhoto').style.display='none';
-  $('passPlaceholder').style.display='grid';
- }
-
-}
-
-['virtName','virtChat','virtStatus','virtBio','virtAge','virtRole','virtDate'].forEach(id=>{
- $(id).addEventListener('input',updatePreview);
- $(id).addEventListener('change',updatePreview);
-});
-
-$('saveBtn').onclick=()=>{
- const d=collect();
- if(!d.name||!d.chat){
-  $('feedback').textContent=
-   'Укажи вирт-имя и название чата.';
-  return;
- }
- try{
-  localStorage.setItem('hellVirtId',JSON.stringify(d));
-  $('homeName').textContent=d.name;
-  $('homeChat').textContent=d.chat;
-  $('feedback').textContent='✓ Паспорт сохранён';
-  updatePreview();
- }catch(e){
-  $('feedback').textContent=
-   'Ошибка сохранения. Попробуй другое фото.';
- }
-};
-
-function load(){
- try{
-  const raw=localStorage.getItem('hellVirtId');
-  if(raw){
-   const d=JSON.parse(raw);
-   const mapping={
-    virtName:d.name,
-    virtChat:d.chat,
-    virtStatus:d.status,
-    virtBio:d.bio,
-    virtAge:d.age,
-    virtRole:d.role,
-    virtDate:d.date
-   };
-   Object.entries(mapping).forEach(([id,value])=>{
-    $(id).value=value||'';
-   });
-   $('homeName').textContent=d.name||'Твой профиль';
-   $('homeChat').textContent=d.chat||'Создай HELL паспорт';
-   const found=palette.findIndex(c=>c.name===d.color);
-   if(found>=0)idIndex=found;
-   setAvatar(d.avatar);
-  }
-  setTheme(localStorage.getItem('hellLight')==='1');
- }catch(e){}
-}
-
-load();
-renderCarousel('id');
-enableSwipe('id');
-updatePreview();
-</script>
-<script>
-  const tg = window.Telegram?.WebApp;
-
-  if (tg) {
-    tg.ready();
-
-    const telegramUser = tg.initDataUnsafe?.user;
-
-    if (telegramUser) {
-      console.log("Telegram ID:", telegramUser.id);
-      console.log("Имя:", telegramUser.first_name);
-      console.log("Username:", telegramUser.username);
-      console.log("Аватар:", telegramUser.photo_url);
-    }
-  }
-</script>
-</body>
-</html>
+ <div id="dynEditor">
+  <div class="dyn-panel">
+   <div class="dyn-kicker">✦ СОЗДАНИЕ ДИНАСТИИ ✦</div>
+   <div class="dyn-upload"><label class="dyn-avatar" for="dynAvatarInput"><img id="dynAvatarPreview" alt="Аватарка семьи"><span id="dynAvatarIcon">📷</span></label><div><b>Аватарка семьи</b><div class="dyn-muted">Нажми на круг, чтобы загрузить фото</div></div></div>
+   <input type="file" id="dynAvatarInput" accept="image/*" hidden>
+   <label class="field"><span>Название династии</span><input id="dynName" maxlength="55" placeholder="Название вашего рода"></label>
+   <label class="field"><span>Девиз рода</span><input id="dynMotto" maxlength="100" placeholder="Например: Верность сквозь века"></label>
+   <label class="field"><span>История рода</span><textarea id="dynStory" maxlength="700" placeholder="Расскажи историю вашей династии..."></textarea></label>
+  </div>
+  <div class="dyn-panel"><div class="dyn-kicker">ВЫБЕРИ ГЕРБ</div><div class="dyn-grid" id="dynCrestGrid"></div></div>
+  <div class="dyn-panel"><div class="dyn-kicker">ЦВЕТ ДИНАСТИИ</div><div class="dyn-colors" id="dynColorGrid"></div><div id="dynEditorCrest" class="dyn-crest"></div></div>
+  <div class="dyn-panel"><div class="dyn-kicker">РОДСТВЕННЫЕ СВЯЗИ</div><p class="dyn-muted">Добавь основателей и родственников. Один человек может быть одновременно основателем рода и, например, дедушкой.</p><div id="dynMemberList"></div>
+   <label class="field"><span>Имя участника</span><input id="dynMemberName" maxlength="40" placeholder="Вирт-имя родственника"></label>
+   <label class="field"><span>Родственная роль</span><select id="dynMemberRole" style="width:100%;padding:12px;border-radius:13px;background:var(--bg);color:var(--text);border:1px solid var(--line)"><option>Дедушка</option><option>Бабушка</option><option>Отец</option><option>Мать</option><option>Сын</option><option>Дочь</option><option>Внук</option><option>Внучка</option><option>Брат</option><option>Сестра</option><option>Муж</option><option>Жена</option><option>Дядя</option><option>Тётя</option><option>Племянник</option><option>Племянница<
