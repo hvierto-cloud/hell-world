@@ -893,13 +893,5 @@ updatePreview();
     }
   }
 </script>
-  const telegramCheck = document.getElementById('telegram-check');
-  const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
-
-  telegramCheck.textContent = user
-    ? 'Telegram подключён! ID: ' + user.id
-    : 'Telegram ID пока не получен';
-</script>
- 
 </body>
 </html>
